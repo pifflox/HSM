@@ -8,6 +8,14 @@
     "dev": "nodemon server"
   },
 
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daiyanrafi/HSM.git"
+  },
+
+
   "dependencies": {
     "async": "^3.2.4",
     "bcrypt": "^5.1.0",
