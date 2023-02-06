@@ -12,6 +12,7 @@ var sweetalert = require('sweetalert2');
 var bodyParser = require('body-parser');
 const http = require('http');
 var db = require('./models/db_controller');
+var signup = require('./controllers/signup');
 
 
 var app = express();
@@ -29,3 +30,5 @@ app.use(cookie());
 
 const PORT = process.env.PORT || 3000;
 Server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+app.use('/signup', signup);
