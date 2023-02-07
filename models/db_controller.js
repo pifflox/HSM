@@ -84,3 +84,15 @@ module.exports.updateverify = function (email, email_status, callback) {
   con.query(query, callback);
   console.log(query);
 };
+//for verify token reset
+module.exports.findOne = function (email, callback) {
+  var query = "select * from `users` where `email` = '" + email + "' ";
+  con.query(query, callback);
+  console.log(query);
+};
+//for verify token reset
+module.exports.temp = function (id, email, token, callback) {
+  var query = "insert into `temp` (`id`, `email`, `token`) values ('" + id + "', '" + email + "', '" + token + "')";
+  con.query(query, callback);
+  console.log(query);
+};
