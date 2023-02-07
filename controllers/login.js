@@ -13,14 +13,13 @@ const { check, validationResult } = require("express-validator");
 
 var con = mysql.createConnection({
   host: "localhost",
-  post: "3000",
   password: "",
   database: "hmsystem",
 });
 
 router.use(
   session({
-    secrect: "somevalue",
+    secrect: 'somevalue',
     resave: true,
     saveUninitialized: true,
   })
