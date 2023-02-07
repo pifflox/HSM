@@ -22,17 +22,18 @@ con.connect(function (err) {
 module.exports.signup = function (username, email, password, status, callback) {
   //condition to check if email already exists in db
   //if email does not exist, insert(signup) new user into db
-  con.query('SELECT email FROM users WHERE email = "'+email+'" '),
+  con.query('SELECT email FROM users WHERE email = "'+email+'" ',
     function (err, result) {
       if (result[0] == undefined) {
         var query =
           "INSERT INTO `users` (`username`, `email`, `password`, `email_status`) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+status+"')";
       //this console.log is for testing purposes
+          con.query(query, callback);
           console.log(query);
       } else {
         console.log("Email already exists");
       }
-    };
+    });
 };
 
 //for verification
