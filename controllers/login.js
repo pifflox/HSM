@@ -6,10 +6,7 @@ var mysql = require("mysql");
 var session = require("express-session");
 var sweetalert = require("sweetalert2");
 const { check, validationResult } = require("express-validator");
-// const dotenv = require("dotenv").config();
 
-// const app = express();
-// app.use(session({ secret: 'somevalue' }));
 
 var con = mysql.createConnection({
   host: "localhost",
