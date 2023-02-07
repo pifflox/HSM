@@ -60,13 +60,13 @@ router.post('/',[
                 }
                
             }else{
-                response.send('Incorrect username / password');
+                response.send('Incorrect username or password');
             }
             response.end();
         });
 
     }else{
-        response.send('please enter user name and password');
+        response.send('enter user name and password');
         response.end();
     }
 

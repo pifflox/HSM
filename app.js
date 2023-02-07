@@ -14,6 +14,7 @@ const http = require("http");
 var db = require("./models/db_controller");
 var signup = require("./controllers/signup");
 var login = require("./controllers/login");
+var verify = require("./controllers/verify");
 
 // const dotenv = require("dotenv").config();
 
@@ -37,3 +38,4 @@ Server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 app.use("/signup", signup);
 app.use("/login", login);
+app.use("/verify", verify);
