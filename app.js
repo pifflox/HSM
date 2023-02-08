@@ -16,7 +16,8 @@ var signup = require("./controllers/signup");
 var login = require("./controllers/login");
 var verify = require("./controllers/verify");
 var reset = require("./controllers/reset_controller");
-var doctor = require("./controllers/doc_controller");
+var doctors = require("./controllers/doc_controller");
+var employee = require("./controllers/employee");
 
 // const dotenv = require("dotenv").config();
 
@@ -42,4 +43,5 @@ app.use("/signup", signup);
 app.use("/login", login);
 app.use("/verify", verify);
 app.use("/reset", reset);
-app.use("/doctor", doctor);
+app.use("/doctor", doctors);
+app.use("/employee", employee);

@@ -17,6 +17,9 @@ con.connect(function (err) {
   console.log("MySql Database connected!");
 });
 
+
+//****************************************[USER]**********************************
+
 //db signup
 module.exports.signup = function (username, email, password, status, callback) {
   //condition to check if email already exists in db
@@ -100,6 +103,10 @@ module.exports.temp = function (id, email, token, callback) {
   con.query(query, callback);
   console.log(query);
 };
+
+
+//**********************************[DOCTOR]**************************************************//
+
 //add doctor details in db by admin only (admin can add doctor)
 module.exports.add_doctor = function (
   first_name,
@@ -222,3 +229,8 @@ module.exports.getalldept = function (callback) {
   con.query(query, callback);
   console.log(query);
 };
+
+
+//***************************************[EMPLOYEE]*********************************************//
+
+
