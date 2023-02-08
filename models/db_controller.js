@@ -66,10 +66,7 @@ module.exports.getuserid = function (email, callback) {
 //for CHECK TOKEN
 module.exports.matchtoken = function (id, token, callback) {
   var query =
-    "select * from `verify` where token = '" +
-    token +
-    "' and id=" +
-    id;
+    "select * from `verify` where token = '" + token + "' and id=" + id;
   con.query(query, callback);
   console.log(query);
 };
@@ -92,7 +89,136 @@ module.exports.findOne = function (email, callback) {
 };
 //for verify token reset
 module.exports.temp = function (id, email, token, callback) {
-  var query = "insert into `temp` (`id`, `email`, `token`) values ('" + id + "', '" + email + "', '" + token + "')";
+  var query =
+    "insert into `temp` (`id`, `email`, `token`) values ('" +
+    id +
+    "', '" +
+    email +
+    "', '" +
+    token +
+    "')";
+  con.query(query, callback);
+  console.log(query);
+};
+//add doctor details in db by admin only (admin can add doctor)
+module.exports.add_doctor = function (
+  first_name,
+  last_name,
+  email,
+  dob,
+  gender,
+  address,
+  phone,
+  image,
+  department,
+  biography,
+  callback
+) {
+  var query =
+    "insert into `doctor` (`first_name`, `last_name`, `email`, `dob`, `gender`, `address`, `phone`, `image`, `department`, `biography`) values ('" +
+    first_name +
+    "', '" +
+    last_name +
+    "', )";
+    "', '" +
+    email +
+    "', )";
+    "', '" +
+    dob +
+    "', )";
+    "', '" +
+    gender +
+    "', )";
+    "', '" +
+    address +
+    "', )";
+    "', '" +
+    phone +
+    "', )";
+    "', '" +
+    image +
+    "', )";
+    "', '" +
+    department +
+    "', )";
+    "', '" +
+    biography +
+    "', )";
+    con.query(query, callback);
+    console.log(query);
+};
+
+//get all details of  doctor 
+module.exports.getAllDoc = function (callback) {
+  var query = "select * from `doctor`";
+  con.query(query, callback);
+  console.log(query);
+};
+//get doc by id
+module.exports.getDocbyId = function (id, callback) {
+  var query = "select * from `doctor` where `id` = '" + id + "' ";
+  con.query(query, callback);
+  console.log(query);
+};
+
+//for edit doctor
+module.exports.editDoc = function (
+  first_name,
+  last_name,
+  email,
+  dob,
+  gender,
+  address,
+  phone,
+  image,
+  department,
+  biography,
+  callback
+) {
+  var query =
+    "insert into `doctor` `first_name` = '" +
+    first_name +
+    "', `last_name` = '" +
+    last_name +
+    "', `email` = '" +
+    email +
+    "' , `dob` = '" +
+    dob +
+    "', `gender` = '" +
+    gender +
+    "', `address` = '" +
+    address +
+    "', `phone` = '" +
+    phone +
+    "', `image` = '" +
+    image +
+    "', `department` =  '" +
+    department +
+    "', `biography` = '" +
+    biography +
+    "' where `id` = '" + id + "' ";
+
+    con.query(query, callback);
+    console.log(query);
+};
+
+//for deleting 
+module.exports.deleteDoc = function (id, callback) {
+  var query = "delete from `doctor` where `id` = '" + id + "'";
+  con.query(query, callback);
+  console.log(query);
+};
+
+//search doctor
+module.exports.searchDoc = function (id, callback) {
+  var query = "select from where `first_name` like "%"'+key+"%"' ";
+  con.query(query, callback);
+  console.log(query);
+};
+
+//doctor department wise
+module.exports.getalldept = function (callback) {
+  var query = "select * from department";
   con.query(query, callback);
   console.log(query);
 };
