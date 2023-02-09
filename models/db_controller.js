@@ -17,7 +17,6 @@ con.connect(function (err) {
   console.log("MySql Database connected!");
 });
 
-
 //****************************************[USER]**********************************
 
 //db signup
@@ -104,7 +103,6 @@ module.exports.temp = function (id, email, token, callback) {
   console.log(query);
 };
 
-
 //**********************************[DOCTOR]**************************************************//
 
 //add doctor details in db by admin only (admin can add doctor)
@@ -127,35 +125,19 @@ module.exports.add_doctor = function (
     "', '" +
     last_name +
     "', )";
-    "', '" +
-    email +
-    "', )";
-    "', '" +
-    dob +
-    "', )";
-    "', '" +
-    gender +
-    "', )";
-    "', '" +
-    address +
-    "', )";
-    "', '" +
-    phone +
-    "', )";
-    "', '" +
-    image +
-    "', )";
-    "', '" +
-    department +
-    "', )";
-    "', '" +
-    biography +
-    "', )";
-    con.query(query, callback);
-    console.log(query);
+  "', '" + email + "', )";
+  "', '" + dob + "', )";
+  "', '" + gender + "', )";
+  "', '" + address + "', )";
+  "', '" + phone + "', )";
+  "', '" + image + "', )";
+  "', '" + department + "', )";
+  "', '" + biography + "', )";
+  con.query(query, callback);
+  console.log(query);
 };
 
-//get all details of  doctor 
+//get all details of  doctor
 module.exports.getAllDoc = function (callback) {
   var query = "select * from `doctor`";
   con.query(query, callback);
@@ -203,13 +185,15 @@ module.exports.editDoc = function (
     department +
     "', `biography` = '" +
     biography +
-    "' where `id` = '" + id + "' ";
+    "' where `id` = '" +
+    id +
+    "' ";
 
-    con.query(query, callback);
-    console.log(query);
+  con.query(query, callback);
+  console.log(query);
 };
 
-//for deleting 
+//for deleting
 module.exports.deleteDoc = function (id, callback) {
   var query = "delete from `doctor` where `id` = '" + id + "'";
   con.query(query, callback);
@@ -218,7 +202,7 @@ module.exports.deleteDoc = function (id, callback) {
 
 //search doctor
 module.exports.searchDoc = function (id, callback) {
-  var query = "select from where `first_name` like "%"'+key+"%"' ";
+  var query = ("SELECT from where `first_name` like " % "+key+") % "' ";
   con.query(query, callback);
   console.log(query);
 };
@@ -230,7 +214,163 @@ module.exports.getalldept = function (callback) {
   console.log(query);
 };
 
-
 //***************************************[EMPLOYEE]*********************************************//
 
+//employee details by id
+module.exports.getleavebyid = function (id, callback) {
+  var query = "select * from `leaves` where `id` = '" + id + "' ";
+  con.query(query, callback);
+};
 
+//get all leaves
+module.exports.getAllleave = function (callback) {
+  var query = "select * from leaves";
+  con.query(query, callback);
+};
+
+//add leave to db
+module.exports.add_leave = function (
+  name,
+  id,
+  type,
+  from,
+  to,
+  reason,
+  callback
+) {
+  var query =
+    "INSERT into `leaves` (`employee`, `id`, `type`, `from`, `to`, `reason`) values ('" +
+    name +
+    "', '" +
+    id +
+    "', '" +
+    type +
+    "', '" +
+    from +
+    "', '" +
+    to +
+    "', '" +
+    reason +
+    "')";
+  console.log(query);
+  con.query(query, callback);
+};
+
+//delete employee by id
+module.exports.deleteleave = function (id, callback) {
+  var query = "delete from `leaves` where `id` = '" + id + "'";
+  con.query(query, callback);
+};
+
+//get all employee details
+module.exports.getAllemployee = function (callback) {
+  var query = "select * from employee";
+  con.query(query, callback);
+};
+
+//add employee details
+module.exports.add_employee = function (
+  name,
+  email,
+  contact,
+  join_date,
+  role,
+  salary,
+  callback
+) {
+  var query =
+    "INSERT into `employee` (`name`, `email`, `contact`, `join_date`, `role`, `salary`) values ('" +
+    name +
+    "', '" +
+    email +
+    "', '" +
+    contact +
+    "', '" +
+    join_date +
+    "', '" +
+    role +
+    "', '" +
+    salary +
+    "')";
+  console.log(query);
+  con.query(query, callback);
+};
+
+//for search employee
+module.exports.searchEmp = function (key, callback) {
+  var query = ("SELECT *  from employe  where `name` like " % "+key+") % "' ";
+  con.query(query, callback);
+  console.log(query);
+};
+
+//delete employee by id
+module.exports.deleteEmp = function (id, callback) {
+  var query = "delete from `employee` where `id` = '" + id + "'";
+  con.query(query, callback);
+};
+
+//edit employee details
+module.exports.editEmp = function (
+  id,
+  name,
+  email,
+  contact,
+  join_date,
+  role,
+  callback
+) {
+  var query =
+    "UPDATE `employee` SET `name` = '" +
+    name +
+    "', `email` = '" +
+    email +
+    "', `contact` = '" +
+    contact +
+    "', `join_date` = '" +
+    join_date +
+    "', `role` = '" +
+    role +
+    "' WHERE `id` = '" +
+    id +
+    "'";
+
+  con.query(query, callback);
+};
+
+//get employee details by id
+module.exports.getEmpbyId = function (id, callback) {
+  var query = "select * from `employee` where `id` = '" + id + "'";
+  con.query(query, callback);
+};
+
+//edit leave
+module.exports.edit_leave = function (
+  id,
+  name,
+  leave_type,
+  from,
+  to,
+  reason,
+  callback
+) {
+  var query =
+    "UPDATE `leaves` SET `employee` = '" +
+    name +
+    "', `leave_type` = '" +
+    leave_type +
+    "', `date_from` = '" +
+    from +
+    "', `date_to` = '" +
+    to +
+    "', `reason` = '" +
+    reason +
+    "' WHERE `id` = '" +
+    id +
+    "'";
+
+  con.query(query, callback);
+};
+
+//***************************************[PATIENT]*********************************************//
+
+//patient book for appoinment
