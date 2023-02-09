@@ -354,7 +354,7 @@ module.exports.edit_leave = function (
   callback
 ) {
   var query =
-    "UPDATE `leaves` SET `employee` = '" +
+    "update `leaves` set `employee` = '" +
     name +
     "', `leave_type` = '" +
     leave_type +
@@ -371,6 +371,82 @@ module.exports.edit_leave = function (
   con.query(query, callback);
 };
 
-//***************************************[PATIENT]*********************************************//
+//***************************************[PATIENT APPOINTMENT]*********************************************//
 
-//patient book for appoinment
+// add appoinment for patient
+module.exports.add_appointment = function (
+  p_name,
+  department,
+  d_name,
+  date,
+  time,
+  email,
+  phone,
+  callback
+) {
+  var query =
+    "insert into appointment (`patinet_name`, `department`, `doctor_name`, `date`, `time`, `email`, `phone`) values ('" +
+    p_name +
+    "', '" +
+    department +
+    "', '" +
+    d_name +
+    "', '" +
+    date +
+    "', '" +
+    time +
+    "', '" +
+    email +
+    "')";
+    "', '" +
+    phone +
+    "')";
+
+    con.query(query, callback);
+
+};
+
+//get all appointment
+module.exports.getAllappointment = function (callback) {
+  var query = "select * from appointment";
+  con.query(query, callback);
+};
+
+//edit appointment
+module.exports.editappointment = function (
+  id,
+  p_name,
+  department,
+  d_name,
+  date,
+  time,
+  email,
+  phone,
+  callback
+) {
+  var query =
+    "update `appointment` set `patient_name` = '" +
+    p_name +
+    "', `department` = '" +
+    department +
+    "', `doctor_name` = '" +
+    d_name +
+    "', `date` = '" +
+    date +
+    "', `email` = '" +
+    email +
+    "', `phone` = '" +
+    phone +
+    "' WHERE `id` = '" +
+    id +
+    "'";
+
+  con.query(query, callback);
+};
+
+
+//delete appointment by id
+module.exports.deleteappointment = function (id, callback) {
+  var query = "delete from `appointment` where `id` = '" + id + "'";
+  con.query(query, callback);
+};

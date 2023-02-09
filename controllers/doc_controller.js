@@ -7,7 +7,7 @@ var fs = require("fs");
 var path = require("path");
 const { route } = require("./login");
 
-//get user
+//get user (if user not exist then redirect to login page)
 router.get("*", function (req, res, next) {
   if (req.cookies["username"] != null) {
     res.redirect("/login");
