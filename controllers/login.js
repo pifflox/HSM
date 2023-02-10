@@ -7,6 +7,10 @@ var db = require.main.require ('./models/db_controller');
 var  sweetalert = require('sweetalert2');
 const { check, validationResult } = require('express-validator');
 
+router.get('/', function(req ,res){
+
+    res.render('login.ejs');
+});
 
 
 var con = mysql.createConnection({
