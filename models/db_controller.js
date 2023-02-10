@@ -398,12 +398,9 @@ module.exports.add_appointment = function (
     "', '" +
     email +
     "')";
-    "', '" +
-    phone +
-    "')";
+  "', '" + phone + "')";
 
-    con.query(query, callback);
-
+  con.query(query, callback);
 };
 
 //get all appointment
@@ -444,9 +441,95 @@ module.exports.editappointment = function (
   con.query(query, callback);
 };
 
-
 //delete appointment by id
 module.exports.deleteappointment = function (id, callback) {
   var query = "delete from `appointment` where `id` = '" + id + "'";
   con.query(query, callback);
+};
+
+//*******************************************************[STORE-MEDICINE]**********************************************//
+
+//get all medicine
+module.exports.getallmed = function (callback) {
+  var query = "select * from store order by id desc";
+  console.log(query);
+  con.query(query, callback);
+};
+
+//add medicine
+module.exports.addMed = function (
+  name,
+  p_date,
+  expire,
+  e_date,
+  price,
+  quantity,
+  callback
+) {
+  var query =
+    "Insert into `store` (`name`, `p_date`, `expire`, `expire_end`, `price`, `quantity`) values ('" +
+    name +
+    "', '" +
+    p_date +
+    "', '" +
+    expire +
+    "', '" +
+    e_date +
+    "', '" +
+    price +
+    "', '" +
+    quantity +
+    "')";
+
+  con.query(query, callback);
+};
+
+//medicine list details
+module.exports.getMedbyId = function (id, callback) {
+  var query = "select * from `store` where `id` = '" + id + "'";
+  con.query(query, callback);
+};
+
+//edit medicine
+module.exports.editMed = function (
+  id,
+  name,
+  p_date,
+  expire,
+  e_date,
+  price,
+  quantity,
+  callback
+) {
+  var query =
+    "update `store` set `name` = '" +
+    name +
+    "', `p_date` = '" +
+    p_date +
+    "', `expire` = '" +
+    expire +
+    "', `expire_end` = '" +
+    e_date +
+    "', `price` = '" +
+    price +
+    "', `quantity` = '" +
+    quantity +
+    "' WHERE `id` = '" +
+    id +
+    "'";
+
+    con.query(query, callback);
+};
+
+//delete medicine
+module.exports.deletemed = function (id, callback) {
+  var query = "delete from `store` where `id` = '" + id + "'";
+  con.query(query, callback);
+};
+
+//search medicine
+module.exports.searchmed = function (key, callback) {
+  var query = ("SELECT *  from store  where `name` like " % "+key+") % "' ";
+  con.query(query, callback);
+  console.log(query);
 };
