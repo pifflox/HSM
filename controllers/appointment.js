@@ -5,7 +5,7 @@ var db = require.main.require("./models/db_controller");
 
 //get user (if user not exist then redirect to login page)
 router.get("*", function (req, res, next) {
-  if (req.cookies["username"] != null) {
+  if (req.cookies["username"] == null) {
     res.redirect("/login");
   } else {
     next();
@@ -16,7 +16,7 @@ router.get("*", function (req, res, next) {
 router.get("/", function (req, res) {
   db.getallappointment(function (err, result) {
     console.log(result);
-    res.render("appointment.ejs", { result: result });
+    res.render("appointment.ejs", { list: result });
   });
 });
 

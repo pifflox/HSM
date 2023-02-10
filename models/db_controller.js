@@ -83,6 +83,36 @@ module.exports.updateverify = function (email, email_status, callback) {
   con.query(query, callback);
   console.log(query);
 };
+
+
+//edit profile
+module.exports.edit_profile = function (
+  id,
+  username,
+  email,
+  password,
+  callback
+) {
+  var query =
+    "update users set username ='" +
+    username +
+    "', email = '" +
+    email +
+    "',password='" +
+    password +
+    "' where id=" +
+    id;
+  con.query(query, callback);
+  console.log(query);
+};
+
+//user details for profile
+module.exports.getuserdetails = function (username, callback) {
+  var query = "select * from users where username='" + username + "'";
+  con.query(query, callback);
+  console.log(query);
+};
+
 //for verify token reset
 module.exports.findOne = function (email, callback) {
   var query = "select * from `users` where `email` = '" + email + "' ";
@@ -207,23 +237,88 @@ module.exports.searchDoc = function (id, callback) {
   console.log(query);
 };
 
+//************************************************[DEPARTMENT]*******************************************//
 //doctor department wise
 module.exports.getalldept = function (callback) {
-  var query = "select * from department";
+  var query = "select * from departments";
   con.query(query, callback);
   console.log(query);
 };
 
-//***************************************[EMPLOYEE]*********************************************//
+//add department
+module.exports.add_dept = function (name, desc, callback) {
+  var query =
+    "insert into departments(department_name,department_desc) values ('" +
+    name +
+    "','" +
+    desc +
+    "')";
+  con.query(query, callback);
+};
 
-//employee details by id
+//get all department
+module.exports.getalldept = function (callback) {
+  var query = "select * from departments";
+  con.query(query, callback);
+};
+
+//delete department
+module.exports.delete_department = function (id, callback) {
+  var query = "delete from departments where id=" + id;
+  con.query(query, callback);
+};
+
+//get department by id
+module.exports.getdeptbyId = function (id, callback) {
+  var query = "select * from departments where id=" + id;
+  con.query(query, callback);
+};
+
+//edit department
+module.exports.edit_dept = function (id, name, desc, callback) {
+  var query =
+    "update departments set department_name='" +
+    name +
+    "',department_desc='" +
+    desc +
+    "' where id=" +
+    id;
+  con.query(query, callback);
+};
+
+//***************************************[LEAVE]*********************************************//
 module.exports.getleavebyid = function (id, callback) {
-  var query = "select * from `leaves` where `id` = '" + id + "' ";
+  var query = "select * from leaves where id=" + id;
+  con.query(query, callback);
+};
+
+module.exports.edit_leave = function (
+  id,
+  name,
+  leave_type,
+  from,
+  to,
+  reason,
+  callback
+) {
+  var query =
+    "update leaves set employee='" +
+    name +
+    "',leave_type='" +
+    leave_type +
+    "',date_from='" +
+    from +
+    "',date_to='" +
+    to +
+    "',reason='" +
+    reason +
+    "' where id=" +
+    id;
   con.query(query, callback);
 };
 
 //get all leaves
-module.exports.getAllleave = function (callback) {
+module.exports.getAllLeave = function (callback) {
   var query = "select * from leaves";
   con.query(query, callback);
 };
@@ -239,20 +334,54 @@ module.exports.add_leave = function (
   callback
 ) {
   var query =
-    "INSERT into `leaves` (`employee`, `id`, `type`, `from`, `to`, `reason`) values ('" +
+    "Insert into `leaves` (`employee`,`emp_id`,`leave_type`,`date_from`,`date_to`,`reason`) values ('" +
     name +
-    "', '" +
+    "','" +
     id +
-    "', '" +
+    "','" +
     type +
-    "', '" +
+    "','" +
     from +
-    "', '" +
+    "','" +
     to +
-    "', '" +
+    "','" +
     reason +
     "')";
   console.log(query);
+  con.query(query, callback);
+};
+
+//edit leave
+module.exports.edit_leave = function (
+  id,
+  name,
+  leave_type,
+  from,
+  to,
+  reason,
+  callback
+) {
+  var query =
+    "update `leaves` set `employee` = '" +
+    name +
+    "', `leave_type` = '" +
+    leave_type +
+    "', `date_from` = '" +
+    from +
+    "', `date_to` = '" +
+    to +
+    "', `reason` = '" +
+    reason +
+    "' WHERE `id` = '" +
+    id +
+    "'";
+
+  con.query(query, callback);
+};
+
+//employee details by id
+module.exports.getleavebyid = function (id, callback) {
+  var query = "select * from `leaves` where `id` = '" + id + "' ";
   con.query(query, callback);
 };
 
@@ -261,6 +390,8 @@ module.exports.deleteleave = function (id, callback) {
   var query = "delete from `leaves` where `id` = '" + id + "'";
   con.query(query, callback);
 };
+
+//***************************************[EMPLOYEE]*********************************************//
 
 //get all employee details
 module.exports.getAllemployee = function (callback) {
@@ -343,33 +474,6 @@ module.exports.getEmpbyId = function (id, callback) {
   con.query(query, callback);
 };
 
-//edit leave
-module.exports.edit_leave = function (
-  id,
-  name,
-  leave_type,
-  from,
-  to,
-  reason,
-  callback
-) {
-  var query =
-    "update `leaves` set `employee` = '" +
-    name +
-    "', `leave_type` = '" +
-    leave_type +
-    "', `date_from` = '" +
-    from +
-    "', `date_to` = '" +
-    to +
-    "', `reason` = '" +
-    reason +
-    "' WHERE `id` = '" +
-    id +
-    "'";
-
-  con.query(query, callback);
-};
 
 //***************************************[PATIENT APPOINTMENT]*********************************************//
 
@@ -491,7 +595,7 @@ module.exports.getMedbyId = function (id, callback) {
 };
 
 //edit medicine
-module.exports.editMed = function (
+module.exports.editmed = function (
   id,
   name,
   p_date,
@@ -555,15 +659,135 @@ module.exports.postcomplain = function (
     subject +
     "')";
 
-    con.query (query, callback);
-  };
+  con.query(query, callback);
+};
 
-  //get all complain
-  module.exports.getcomplain = function (callback) {
-    var query = "select * from complain";
-    con.query(query, callback);
-  };
+//get all complain
+module.exports.getcomplain = function (callback) {
+  var query = "select * from complain";
+  con.query(query, callback);
+};
 
-  //*******************************************************[APPOINTMENT]**********************************************//
+//*******************************************************[APPOINTMENT]**********************************************//
 
-  //
+//add appointment
+module.exports.add_appointment = function (
+  p_name,
+  department,
+  d_name,
+  date,
+  time,
+  email,
+  phone,
+  callback
+) {
+  var query =
+    "insert into appointment (patient_name,department,doctor_name,date,time,email,phone) values ('" +
+    p_name +
+    "','" +
+    department +
+    "','" +
+    d_name +
+    "','" +
+    date +
+    "','" +
+    time +
+    "','" +
+    email +
+    "','" +
+    phone +
+    "')";
+  con.query(query, callback);
+};
+
+//get all appointment
+module.exports.getallappointment = function (callback) {
+  var query = "select * from appointment";
+  con.query(query, callback);
+};
+
+//get appointment by id
+module.exports.getappointmentbyid = function (id, callback) {
+  var query = "select * from appointment where id=" + id;
+  console.log(query);
+  con.query(query, callback);
+};
+
+//edit appointment
+module.exports.editappointment = function (
+  id,
+  p_name,
+  department,
+  d_name,
+  date,
+  time,
+  email,
+  phone,
+  callback
+) {
+  var query =
+    "update appointment set patient_name='" +
+    p_name +
+    "',department='" +
+    department +
+    "',doctor_name='" +
+    d_name +
+    "',date='" +
+    date +
+    "',time='" +
+    time +
+    "',email='" +
+    email +
+    "',phone='" +
+    phone +
+    "' where id=" +
+    id;
+  con.query(query, callback);
+};
+
+//delete appointment by id
+module.exports.deleteappointment = function (id, callback) {
+  var query = "delete from appointment where id=" + id;
+  con.query(query, callback);
+};
+
+
+module.exports.findOne = function (email, callback) {
+  var query = "select *from users where email='" + email + "'";
+  con.query(query, callback);
+  console.log(query);
+};
+
+module.exports.temp = function (id, email, token, callback) {
+  var query =
+    "insert into `temp` (`id`,`email`,`token`) values ('" +
+    id +
+    "','" +
+    email +
+    "','" +
+    token +
+    "')";
+  con.query(query, callback);
+};
+
+module.exports.checktoken = function (token, callback) {
+  var query = "select *from temp where token='" + token + "'";
+  con.query(query, callback);
+  console.log(query);
+};
+
+module.exports.setpassword = function (id, newpassword, callback) {
+  var query =
+    "update `users` set `password`='" + newpassword + "' where id=" + id;
+  con.query(query, callback);
+};
+
+
+
+
+
+
+
+
+
+
