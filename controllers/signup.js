@@ -37,7 +37,7 @@ router.post(
       email_status
     );
     var token = randomToken(16);
-    db.verify(req.body.username, req.body.email, token);
+    db.verify(req.body.username, email, token);
 
     db.getuserid(email, function (err, result) {
       var id = result[0].id;
@@ -47,7 +47,7 @@ router.post(
       <li>User Id: ${id}</li>
       <li>Token: ${token}</li>
       </ul>
-      <p>verify link: <a href="http://localhost:3000/verify">Verify</a></p>
+      <p>verify link: <a href="http://localhost:8800/verify">Verify</a></p>
       <p><b>Automated mail</b></p>`;
 
       //nodemailer to send mail authntication
@@ -70,7 +70,7 @@ router.post(
             if(err){
                 return console.log(err);
             }
-            console.log('Message sent: %s', info.messageId);
+            console.log(info);
             //(info)
         });
         res.send("Email sent to " + email + " for verification");

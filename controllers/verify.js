@@ -20,7 +20,8 @@ router.post('/', function (req, res) {
             var email = result[0].email;
             var email_status = "verified";
             db.updateverify(email, email_status, function (err, result) {
-                res.send("Email verified successfully");
+                // res.send("Email verified successfully");
+                res.redirect("/login");
             });
         } else {
             res.send("Email verification failed");
