@@ -13,7 +13,7 @@ var db = require.main.require ('./models/db_controller');
 
 //get user (if user not exist then redirect to login page)
 router.get("*", function (req, res, next) {
-  if (req.cookies["username"] != null) {
+  if (req.cookies["username"] == null) {
     res.redirect("/login");
   } else {
     next();
@@ -34,9 +34,12 @@ var upload = multer({ storage: storage });
 
 //get doctors
 router.get("/", function (req, res) {
+  db.getAllDoc(function (err, result) {
   if (err) throw err;
   res.render("doctors.ejs", { list: result });
+  });
 });
+
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -79,7 +82,7 @@ router.get("/edit_doctor/:id", function (req, res) {
 //edit doctor info
 router.post("/edit_doctor/:id", function (req, res) {
   var id = req.params.id;
-  db.getDocbyId(
+  db.editDoc(
     req.body.first_name,
     req.body.last_name,
     req.body.email,
@@ -107,7 +110,7 @@ router.get("/delete_doctor/:id", function (req, res) {
 //delete doctor info
 router.post("/delete_doctor/:id", function (req, res) {
   var id = req.params.id;
-  db.getDocbyId(id, function (err, result) {
+  db.deleteDoc(id, function (err, result) {
     if (err) throw err;
     res.redirect("/doctors");
   });

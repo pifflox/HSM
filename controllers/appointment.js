@@ -47,7 +47,7 @@ router.get("/edit_appointment/:id", function (req, res) {
   var id = req.params.id;
   db.getappointmentbyid(id, function (err, result) {
     console.log(result);
-    res.render("edit_appointment.ejs", { result: result });
+    res.render("edit_appointment.ejs", { list: result });
   });
 });
 
@@ -56,6 +56,7 @@ router.post("/edit_appointment/:id", function (req, res) {
   //p_name = patient name, d_name = specfiq dept name that patient wants to do appointment with
   var id = req.params.id;
   db.editappointment(
+    id,
     req.body.p_name,
     req.body.department,
     req.body.d_name,
@@ -72,9 +73,9 @@ router.post("/edit_appointment/:id", function (req, res) {
 //delete appointment
 router.get("/delete_appointment/:id", function (req, res) {
   var id = req.params.id;
-  db.getallappointmentbyid(id, function (err, result) {
+  db.getappointmentbyid(id, function (err, result) {
     console.log(result);
-    res.redirect("delete_appointment.ejs", { result: result });
+    res.render("delete_appointment.ejs", { list: result });
   });
 });
 
