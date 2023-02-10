@@ -518,7 +518,7 @@ module.exports.editMed = function (
     id +
     "'";
 
-    con.query(query, callback);
+  con.query(query, callback);
 };
 
 //delete medicine
@@ -533,3 +533,33 @@ module.exports.searchmed = function (key, callback) {
   con.query(query, callback);
   console.log(query);
 };
+
+//*******************************************************[complain]**********************************************//
+
+//post complain
+module.exports.postcomplain = function (
+  message,
+  name,
+  email,
+  subject,
+  callback
+) {
+  var query =
+    "insert into `complain` (`message`, `name`, `email`, `subject`) values ('" +
+    message +
+    "', '" +
+    name +
+    "', '" +
+    email +
+    "', '" +
+    subject +
+    "')";
+
+    con.query (query, callback);
+  };
+
+  //get all complain
+  module.exports.getcomplain = function (callback) {
+    var query = "select * from complain";
+    con.query(query, callback);
+  };
