@@ -10,6 +10,10 @@ const { check, validationResult } = require("express-validator");
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
+router.get("/", function (req, res) {
+  res.render("signup.ejs");
+});
+
 router.post(
   "/",
   [

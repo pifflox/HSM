@@ -4,22 +4,23 @@ var router = express.Router();
 var bodyParser = require("body-parser");
 var nodemailer = require("nodemailer");
 var randomToken = require("random-token");
+
 const { route } = require("./login");
 var db = require.main.require("./models/db_controller");
 
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
+// router.use(bodyParser.urlencoded({ extended: true }));
+// router.use(bodyParser.json());
 
-// router.get("/", function (req, res) {
-//   res.render("resetpassword.ejs");
-// });
+router.get("/", function (req, res) {
+  res.render("resetpassword.ejs");
+});
 
 router.post("/", function (req, res) {
   var email = req.body.email;
   db.findOne(email, function (err, resultone) {
     if (!resultone) {
       console.log("email not found");
-      res.send("email not found");
+      res.redirect("email not found");
     }
     var id = resultone[0].id;
     var email = resultone[0].email;

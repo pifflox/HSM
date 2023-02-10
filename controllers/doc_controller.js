@@ -7,6 +7,10 @@ var fs = require("fs");
 var path = require("path");
 const { route } = require("./login");
 
+
+var db = require.main.require ('./models/db_controller');
+
+
 //get user (if user not exist then redirect to login page)
 router.get("*", function (req, res, next) {
   if (req.cookies["username"] != null) {

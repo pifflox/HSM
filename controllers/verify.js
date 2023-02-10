@@ -6,11 +6,10 @@ var db = require.main.require("./models/db_controller");
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-module.exports = router;
 
-// router.get("/", function (req, res) {
-//   res.render("verify.ejs");
-// });
+router.get("/", function (req, res) {
+    res.render("verify.ejs");
+});
 
 router.post('/', function (req, res) {
     var id = req.body.id;
@@ -29,3 +28,4 @@ router.post('/', function (req, res) {
     });
 });
 
+module.exports = router;

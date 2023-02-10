@@ -13,10 +13,6 @@ router.get('*', function(req, res, next){
 });
 
 
-
-
-
-
 router.get('/',function(req,res){
     db.getAllDoc(function(err,result){
         db.getallappointment(function(err,result1){
