@@ -404,7 +404,7 @@ module.exports.add_appointment = function (
 };
 
 //get all appointment
-module.exports.getAllappointment = function (callback) {
+module.exports.getallappointment = function (callback) {
   var query = "select * from appointment";
   con.query(query, callback);
 };

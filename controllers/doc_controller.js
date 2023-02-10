@@ -65,7 +65,7 @@ router.post("/add_doctor", upload.single("image"), function (req, res) {
   if (db.add_doctor) {
     console.log("Doctor Added");
   }
-  res.render("add_doctor");
+  res.redirect("add_doctor");
 });
 
 //edit doctor
@@ -109,7 +109,7 @@ router.post("/delete_doctor/:id", function (req, res) {
   var id = req.params.id;
   db.getDocbyId(id, function (err, result) {
     if (err) throw err;
-    res.redirect("doctor");
+    res.redirect("/doctors");
   });
 });
 

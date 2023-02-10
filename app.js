@@ -19,7 +19,6 @@ var signup = require("./controllers/signup");
 var login = require("./controllers/login");
 var verify = require("./controllers/verify");
 var reset = require("./controllers/reset_controller");
-var doctors = require("./controllers/doc_controller");
 var employee = require("./controllers/employee");
 var appointment = require("./controllers/appointment");
 var store = require("./controllers/store");
@@ -52,7 +51,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookie());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8800;
 Server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 app.use("/login", login);
