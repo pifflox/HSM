@@ -43,49 +43,47 @@ router.post("/add_appointment", function (req, res) {
 });
 
 //edit appointment
-router.get ("/edit_appointment/:id", function (req, res) {
-    var id = req.params.id;
-    db.getappointmentbyid(id, function (err, result) {
-        console.log(result);
-        res.render("edit_appointment.ejs", { result: result });
-    });
+router.get("/edit_appointment/:id", function (req, res) {
+  var id = req.params.id;
+  db.getappointmentbyid(id, function (err, result) {
+    console.log(result);
+    res.render("edit_appointment.ejs", { result: result });
+  });
 });
 
 //post edited appointment to db
 router.post("/edit_appointment/:id", function (req, res) {
-    //p_name = patient name, d_name = specfiq dept name that patient wants to do appointment with
-    var id = req.params.id;
-    db.editappointment(
-      req.body.p_name,
-      req.body.department,
-      req.body.d_name,
-      req.body.date,
-      req.body.time,
-      req.body.email,
-      req.body.phone,
-      function (err, result) {
-        res.redirect("/appointment");
-      }
-    );
-  });
-
-  //delete appointment
-    router.get("/delete_appointment/:id", function (req, res) {
-        var id = req.params.id;
-        db.getallappointmentbyid(id, function (err, result) {
-            console.log(result);
-            res.redirect("delete_appointment.ejs", { result: result });   
-        });
-    });
-    
-//post deleted appointment to db
-router.post("/delete_appointment/:id", function (req, res) {
-    var id = req.params.id;
-    db.deleteappointment(id, function (err, result) {
-        res.redirect("/appointment");
-    });
+  //p_name = patient name, d_name = specfiq dept name that patient wants to do appointment with
+  var id = req.params.id;
+  db.editappointment(
+    req.body.p_name,
+    req.body.department,
+    req.body.d_name,
+    req.body.date,
+    req.body.time,
+    req.body.email,
+    req.body.phone,
+    function (err, result) {
+      res.redirect("/appointment");
+    }
+  );
 });
 
+//delete appointment
+router.get("/delete_appointment/:id", function (req, res) {
+  var id = req.params.id;
+  db.getallappointmentbyid(id, function (err, result) {
+    console.log(result);
+    res.redirect("delete_appointment.ejs", { result: result });
+  });
+});
 
+//post deleted appointment to db
+router.post("/delete_appointment/:id", function (req, res) {
+  var id = req.params.id;
+  db.deleteappointment(id, function (err, result) {
+    res.redirect("/appointment");
+  });
+});
 
 module.exports = router;
