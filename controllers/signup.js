@@ -56,24 +56,24 @@ router.post(
         port: 465,
         secure: true,
         auth: {
-            user:"trashyou14@gmail.com",
-            pass:"lpvqjeguqogwneau"
-        }
+          user: "trashyou14@gmail.com",
+          pass: "lpvqjeguqogwneau",
+        },
       });
       var mailOptions = {
-        from: 'HMSYSTEM@gmail.com',
+        from: "HMSYSTEM@gmail.com",
         to: email,
-        subject: 'Verify your email',
-        html: output
+        subject: "Verify your email",
+        html: output,
       };
-        transporter.sendMail(mailOptions, function (err, info) {
-            if(err){
-                return console.log(err);
-            }
-            console.log(info);
-            //(info)
-        });
-        res.send("Email sent to " + email + " for verification");
+      transporter.sendMail(mailOptions, function (err, info) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log(info);
+        //(info)
+      });
+      res.send("Email sent to " + email + " for verification");
     });
   }
 );
